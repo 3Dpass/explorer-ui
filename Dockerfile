@@ -6,6 +6,8 @@ FROM node:lts-alpine as builder
 
 WORKDIR /app/polkadapt
 
+RUN apk add --update --no-cache alpine-sdk python3 && ln -sf python3 /usr/bin/python
+
 # Copy all PolkADAPT package.json files and install packages.
 
 COPY polkadapt/package.json .
@@ -40,6 +42,7 @@ RUN npm exec ng build -- --configuration production coingecko
 
 WORKDIR /app
 
+RUN apk add --update --no-cache alpine-sdk python3 && ln -sf python3 /usr/bin/python
 COPY package.json .
 RUN npm i
 
